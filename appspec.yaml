@@ -1,0 +1,19 @@
+version: 0.2
+os: linux
+files:
+  - source: /
+    destination: /var/www/html
+permissions:
+  - object: /var/www/html
+    owner: root
+    group: root
+hooks:
+  BeforeInstall:
+    - location: scripts/clear_cache.sh
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      runas: root
